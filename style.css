@@ -81,6 +81,54 @@ ul.nav-algorithm li a:hover:not(.active)
 
 
 
+ul.in_site_navigation
+{
+  height: 100%;
+  position: fixed;
+  top:61px;
+  left: 0px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #555;
+
+}
+
+ul.in_site_navigation li 
+{
+  float: top;
+}
+
+ul.in_site_navigation li a 
+{
+  color:white;
+  display: block;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+ul.in_site_navigation li h2
+{
+  display: block;
+  text-align: left;
+  padding: 10px 12px;
+  text-decoration: none;
+  font-weight: 500;
+
+}
+
+ul.in_site_navigation li a:hover:not(.active) 
+{
+  background-color: limegreen;
+  color:black;
+}
+
+
+
+
 
 
 main
