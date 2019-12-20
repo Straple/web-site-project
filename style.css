@@ -1,0 +1,122 @@
+body {
+	padding: 0 30px;
+	font-size: 18px;
+	line-height: 26px;
+	font-family: "Arial", sans-serif;
+	color: white;
+	background-color: #333;
+}
+
+
+
+
+ul.horizon-nav
+{
+  position: fixed;
+  top:0px;
+  left: 0px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #009d4b;
+  width:100%;
+}
+
+ul.horizon-nav li 
+{
+  float: left;
+}
+
+ul.horizon-nav li a 
+{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-weight: 700;
+  color:black;
+}
+
+ul.horizon-nav li a:hover:not(.active) 
+{
+  background-color: limegreen;
+}
+
+
+
+ul.nav-algorithm
+{
+  margin-left:25%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #009d4b;
+  width:100%;
+}
+
+ul.nav-algorithm li 
+{
+  float: top;
+}
+
+ul.nav-algorithm li a 
+{
+  display: block;
+  color: black;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-weight: 700;
+
+}
+
+ul.nav-algorithm li a:hover:not(.active) 
+{
+  background-color: limegreen;
+}
+
+
+
+
+
+
+main
+{
+	margin-left: 25%;
+	margin-top:5%;
+	width:50%;
+}
+
+
+
+
+
+code {
+  color: limegreen;
+  font-weight: bold;
+  font-size:20px;
+}
+
+
+pre
+{
+	background-color:#202020;
+  color: limegreen;
+  /*font-family: "Courier New", "Courier", monospace;*/
+  font-weight: bold;
+  font-size:20px;
+}
+
+
+
+footer
+{
+	margin-top: 30px;
+	padding-top: 10px;
+	color: #aaaaaa;
+	border-top: 1px solid #aaaaaa;
+
+}
