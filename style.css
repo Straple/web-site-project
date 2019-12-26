@@ -5,6 +5,7 @@ body {
 	font-family: "Arial", sans-serif;
 	color: white;
 	background-color: #333;
+	/*background-image: url('images/good_background.png');/*DEL */
 }
 
 
@@ -122,8 +123,7 @@ ul.in_site_navigation li h2
 
 ul.in_site_navigation li a:hover:not(.active) 
 {
-  background-color: limegreen;
-  color:black;
+  background-color: #005f4b;
 }
 
 
