@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="style.css" rel="stylesheet">
+		<title>Конспект алгоритмы</title>
+		<meta name="keywords" content="C++, Алгоритмы, Олимпиадное программирование">
+		<meta name="description" content="Алгоритмы C++">
+	</head>
+
+
+	<body>
+
+	<nav>
+		<ul class="horizon-nav">
+			<li><a href="index.html"><img src="images/HomeIcon.png"></a></li>
+		</ul>
+	</nav>
+
+  <main>
+
+  	<header>
+      <h1>Конспект «Структуры данных»</h1><br>
+    </header>
+
+
+    <h2>Содержание</h2><br>
+    <nav>
+    	<ol class="in_site_navigation">
+    		<li><a href="#dot">Точка, вектор</a></li>
+  			<li><a href="#angle">Углы между векторами</a></li>
+  			<li><a href="#line">Линии</a></li>
+    	</ol>
+    </nav> <br>
+      
+    <section>Структуры данных позволяют выполнять операции намного быстрее. Существует большое количество структур данных каждая из них имеет свои плюсы и минусы. О них я расскажу сдесь.</section>
+
+    <h2>Дерево отрезков(ДО)</h2>
+    <section>Дерево отрезков - это структура данных, которая позволяет выполнять ассоциативные операции(+, %, min, max) на отрезке за log_2, требует 4*размерность массива памяти. Эта структура данных довольно популярная в Олимпиадном программировании. ДО выглядит как перевернутое дерево. У каждого родителя есть левый и правый сын. Родитель равен операции между его сыновьями. Возможные операции: построение за n*log n, взятие операции за log n, изменение элемента в массиве за log n.</section>
+
+<pre>
+//Дерево отрезков(ДО)\
+позволяет выполнять ассоциативные операции(+, %, min, max) \
+на отрезке за log, требует 4*n памяти\
+n - размер массива
+
+typedef long long ll;
+const int maxn = 1e4;
+ll V[maxn], T[4 * maxn];
+
+//build(1, 0, n - 1);  build Tree O(n*log(n))
+void build(int v, int tl, int tr){
+    if (tl == tr){
+        T[v] = V[tl];
+    }
+    else{
+        int tm = (tl + tr) / 2;
+        build(v * 2, tl, tm);
+        build(v * 2 + 1, tm + 1, tr);
+        T[v] = T[v * 2] + T[v * 2 + 1];
+    }
+}
+
+//getsum(1, 0, n - 1, l - 1, r - 1) -> получить сумму на отрезке [l, r]
+ll getsum(int v, int tl, int tr, int l, int r){
+    if (l > r){
+        return 0;
+    }
+    if (l == tl && r == tr){
+        return T[v];
+    }
+    int tm = (tl + tr) / 2;
+    return getsum(v * 2, tl, tm, l, min(r, tm)) +
+     getsum(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
+}
+
+// обновляет значение элемента v на новое\
+update(1, 0, n - 1, pos, new_val);
+void update(int v, int tl, int tr, int pos, int new_val){
+    if (tl == tr){
+        T[v] = new_val;
+    }
+    else {
+        int tm = (tl + tr) / 2;
+        if (pos <= tm)
+        {
+            update(v * 2, tl, tm, pos, new_val);
+        }
+        else
+        {
+            update(v * 2 + 1, tm + 1, tr, pos, new_val);
+        }
+        T[v] = T[v * 2] + T[v * 2 + 1];
+    }
+}
+</pre>
+
+    <h2>Хеш таблица</h2>
+    <section>Хеш таблица - это структура данных, позволяющая за константу находить элемент</section>
+<pre>
+//Хеш таблица
+typedef long long ll;
+
+const int MOD = 1e6; // Вариант 1
+struct Hash {
+    vector< pair< int, int>> f[MOD];
+    int size;
+    int& operator [](int val) {
+        for (int i = 0; i < f[val % MOD].size(); i++) {
+            if (f[val % MOD][i].first == val) {
+                return f[val % MOD][i].second;
+            }
+        }
+        f[val % MOD].push_back(make_pair(val, 0));
+        return f[val % MOD][f[val % MOD].size() - 1].second;
+    }
+
+};
+
+
+struct hm { // Вариант 2
+    int n;
+    int* t;
+    ll* ind;
+    void gethm(int _n){// берем хеш по основанию n
+        n = _n;
+        t = new int[n];
+        ind = new ll[n];
+        for (int i = 0; i < n; ++i) {
+            ind[i] = 0;
+        }
+    }
+    int& operator[](ll x){
+        int i = ((x % n) + n) % n; // хеш функция
+        while (ind[i] != x && ind[i] != 0) {
+            i = (i + 1) % n;
+        }
+        if (ind[i] == 0) {
+            ind[i] = x;
+        }
+        return t[i];
+    }
+};
+</pre>
+
+	<!--<a href="CPP/geometry.cpp" download style="color:white;">Код Вычислительная геометрия</a>-->
+
+  </main>
+
+  	<br><br>
+    <footer>
+      Подвал сайта
+    </footer>
+  
+</body></html>

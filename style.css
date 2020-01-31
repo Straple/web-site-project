@@ -8,9 +8,6 @@ body {
 	/*background-image: url('images/good_background.png');/*DEL */
 }
 
-
-
-
 ul.horizon-nav
 {
   position: fixed;
@@ -82,12 +79,9 @@ ul.nav-algorithm li a:hover:not(.active)
 
 
 
-ul.in_site_navigation
+ol.in_site_navigation
 {
   height: 100%;
-  position: fixed;
-  top:61px;
-  left: 0px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -96,12 +90,12 @@ ul.in_site_navigation
 
 }
 
-ul.in_site_navigation li 
+ol.in_site_navigation li 
 {
   float: top;
 }
 
-ul.in_site_navigation li a 
+ol.in_site_navigation li a 
 {
   color:white;
   display: block;
@@ -111,7 +105,7 @@ ul.in_site_navigation li a
   font-weight: 500;
 }
 
-ul.in_site_navigation li h2
+ol.in_site_navigation li h2
 {
   display: block;
   text-align: left;
@@ -121,7 +115,7 @@ ul.in_site_navigation li h2
 
 }
 
-ul.in_site_navigation li a:hover:not(.active) 
+ol.in_site_navigation li a:hover:not(.active) 
 {
   background-color: #005f4b;
 }
