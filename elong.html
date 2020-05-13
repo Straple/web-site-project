@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="style.css" rel="stylesheet">
+		<title>Конспект алгоритмы</title>
+		<meta name="keywords" content="C++, Алгоритмы, Олимпиадное программирование">
+		<meta name="description" content="Алгоритмы C++">
+	</head>
+
+<body>
+
+	<nav>
+		<ul class="horizon-nav">
+			<li><a href="index.html"><img src="images/HomeIcon.png"></a></li>
+		</ul>
+	</nav>
+
+  <main>
+
+  	<header>
+      <h1>Конспект «Структуры данных»</h1><br>
+    </header>
+
+
+    <h2>Содержание</h2><br>
+    <nav>
+    	<ol class="in_site_navigation">
+    		<li><a href="#performance">Представление длинного числа</a></li>
+            <li><a href="#conversion">Преобразование типов</a></li>
+            <li><a href="#comparison">сравнение</a></li>
+    	</ol>
+    </nav> <br>
+      
+    <section>Длинная целочисленная арифметика полезная вещь, но ее нет в C++, поэтому я решил это исправить.</section>
+
+    <h2 id="performance">Представление числа</h2>
+    <section>Будем представлять длинное набором чисел по основанию. Возьмем это оснавание равное 10^9, т.к. взяв большее число мы можем выйти за пределы long long(1e^18) и для удобства вывода(см. ниже).</section>
+<pre>
+struct elong{
+    edeque digits; // edeque - это самописный дек на циклическом массиве
+    bool is_negative; // не забудем про знак
+}
+</pre>
+
+    <h2 id="conversion">Преобразование типов</h2>
+    <section>Назовем функцию преобразования типов cast().</section>
+<pre>
+elong cast(std::string str) const {
+    elong ret; // для строки
+    if (str.size() == 0) {
+        ret.is_negative = false; // "" = 0
+    }
+    else {
+        if (str[0] == '-') {
+            str = str.substr(1);
+            ret.is_negative = true;
+        }
+        else {
+            ret.is_negative = false;
+        }
+        for (int i = str.size(); i > 0; i -= 9) {
+            if (i < 9) {
+                ret.digits.push_back(atoi(str.substr(0, i).c_str()));
+            }
+            else {
+                ret.digits.push_back(atoi(str.substr(i - 9, 9).c_str()));
+            }
+        }
+        ret.rlz();
+    }
+    return ret;
+}
+elong cast(signed long long l) const {
+    elong ret; // для числа
+    if (l < 0) {
+        ret.is_negative = true; l = -l;
+    }
+    else {
+        ret.is_negative = false;
+    }
+    while (l > 0) {
+        ret.digits.push_back(l % elong_base);
+        l /= elong_base;
+    }
+    return ret;
+}
+elong cast(edeque _digits, bool _is_negative) const {
+    elong ret; // Ну тут понятно
+    ret.digits = _digits;
+    ret.is_negative = _is_negative;
+    return ret;
+}
+</pre>
+
+
+
+<h2 id="comparison">Сравнение</h2>
+    <section>Здесь я напишу только == и < , т.к. остальные операции очень похожи или их можно реализовать из других, но если вы не догадаетесь, то можно посмотреть в самом конце страницы.</section>
+<pre>
+bool operator == (const elong& Rhs) const {
+    if (digits.size() != Rhs.digits.size()) {
+        return false;
+    }
+    else if (is_negative != Rhs.is_negative) {
+        return false;
+    }
+    else if (digits.empty()) {
+        if (Rhs.digits.empty() || (Rhs.digits.size() == 1 && Rhs.digits[0] == 0)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else if (Rhs.digits.empty()) {
+        if (digits.size() == 1 && digits[0] == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        size_t i;
+        for (i = 0; i < digits.size(); i++) {
+            if (digits[i] != Rhs.digits[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+bool operator <  (const elong& Rhs) const {
+    if (is_negative) {
+        if (Rhs.is_negative) {
+            return ((-(*this)) < (-Rhs));
+        }
+        else {
+            return true;
+        }
+    }
+    else if (Rhs.is_negative) {
+        return false;
+    }
+    else {
+        if (digits.size() != Rhs.digits.size()) {
+            return digits.size() < Rhs.digits.size();
+        }
+        else {
+            int i;
+            for (i = digits.size() - 1; i >= 0; i--) {
+                if (digits[i] != Rhs.digits[i]) {
+                    return digits[i] < Rhs.digits[i];
+                }
+            }
+            return false; // они равны
+        }
+    }
+}
+</pre>
+
+
+
+
+
+
+
+
+	<a href="CPP/elong.cpp" download style="color:white;">Код длинной арифметики</a>
+
+  </main>
+
+  	<br><br>
+    <footer>
+      Подвал сайта
+    </footer>
+  
+</body></html>

@@ -68,7 +68,7 @@
 			cnt += 2;
 		}
 	}
-	if (sqrt(n) == int(sqrt(n))){ // hello
+	if (sqrt(n) == int(sqrt(n))){
 		cnt++;
 	}
 	return cnt;
@@ -201,18 +201,17 @@
 
 			<p>А для нечётного N: a<sup>N</sup> = a<sup>N - 1</sup> * a  </p>
 <pre>
-long long Pow(long long a, long long N, long long MOD){
+int bin_pow(int a, int N, int MOD){
 	if (N == 0){
 		return 1;
 	}
-
-	long long z = Pow(a, N / 2, MOD);
-
+	int z = bin_pow(a, N / 2, MOD);
+	z = (z * z) % MOD;
 	if (N % 2 == 0){
-		return (z * z) % MOD;
+		return z;
 	}
 	else{
-		return (((a * z) % MOD ) * z) % MOD;
+		return (z * a) % MOD;
 	}
 }
 </pre>
@@ -281,7 +280,6 @@ long long Fibonacci(long long n){ // Fibonacci за log(n)
 
 
 		<a href="CPP/number.cpp" download style="color:white;">Код Теории Чисел</a>
-
 
   </main>
 

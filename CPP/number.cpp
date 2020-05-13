@@ -55,18 +55,17 @@ vector<bool> Eratos_Sieve(ll n) {
 
 // if(abs(a - b) < EPS) => то числа равны с определенной точностью
 
-// Bin pow
-ll bp(ll a, ll n, ll mod) {
-    if (n == 1) {
-        return a;
+int bin_pow(int a, int N, int MOD){
+    if (N == 0){
+        return 1;
     }
-    ll z = bp(a, n / 2, mod);
-    z = (z * z) % mod;
-    if (n % 2 == 0) {
+    int z = bin_pow(a, N / 2, MOD);
+    z = (z * z) % MOD;
+    if (N % 2 == 0){
         return z;
     }
-    else {
-        return (z * a) % mod;
+    else{
+        return (z * a) % MOD;
     }
 }
 
